@@ -92,7 +92,7 @@ M.availability_coursetime.form.fillValue = function(value, node) {
     value.t = valueNode.get('value');
 };
 
-M.availability_profile.form.fillErrors = function(errors, node) {
+M.availability_coursetime.form.fillErrors = function(errors, node) {
 
     var value = {};
     this.fillValue(value, node);
