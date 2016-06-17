@@ -24,6 +24,8 @@
 
 namespace availability_coursetime;
 
+require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -73,14 +75,16 @@ class condition extends \core_availability\condition {
         // Check condition.
         $now = self::get_time();
 
-        $course = $DB->get_record('course', array('id' => $this->courseid));
+        if (!$course = $DB->get_record('course', array('id' => $this->courseid))) {
+            return true;
+        }
 
         require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
         $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
         // Timespent stored in minutes
-        $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
+        $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
 
         if ($not) {
             $allow = !$allow;
@@ -97,7 +101,6 @@ class condition extends \core_availability\condition {
 
         $course = $DB->get_record('course', array('id' => $this->courseid));
 
-        require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
         $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
@@ -133,7 +136,7 @@ class condition extends \core_availability\condition {
         $satag = $standalone ? 'short_' : 'full_';
 
         $course = $DB->get_record('course', array('id' => $this->courseid), 'id,shortname,fullname');
-        $course->timespent = $this->timespent;
+        $course->timespent = block_use_stats_format_time($this->timespent * 60);
 
         return get_string($satag . 'coursetime', 'availability_coursetime', $course);
     }
