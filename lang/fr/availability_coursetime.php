@@ -24,8 +24,8 @@
 
 $string['description'] = 'Empêche l\'accès avant q\'un certain temps soit passé dans un certain cours.';
 $string['pluginname'] = 'Restriction sur temps passé dans un cours';
-$string['full_coursetime'] = 'Disponible lorsque le temps passé dans le cours <strong>{$a->fullname}</strong> excède <strong>{$a->timespent}</strong> minutes';
-$string['short_coursetime'] = 'Disponible après <strong>{$a->timespent}</strong> minutes passés dans le cours <strong>{$a->shortname}</strong>';
+$string['full_coursetime'] = 'Disponible lorsque le temps passé dans le cours <strong>{$a->fullname}</strong> excède <strong>{$a->timespent}</strong>';
+$string['short_coursetime'] = 'Disponible après <strong>{$a->timespent}</strong> passés dans le cours <strong>{$a->shortname}</strong>';
 $string['title'] = 'Temps passé';
 $string['incourse'] = 'minutes passées dans le cours ';
 $string['conditiontitle'] = 'Plus de ';
