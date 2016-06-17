@@ -55,7 +55,7 @@ class frontend extends \core_availability\frontend {
         global $DB, $USER;
 
         $authoredcourses = array();
-        if ($authored = get_user_capability_course('moodle/course:manageactivities', $USER->id, false, '', 'sortorder')) {
+        if ($authored = get_user_capability_course('moodle/course:manageactivities', $USER->id, true, '', 'sortorder')) {
             foreach ($authored as $a) {
                 $authoredcourses[$a->id] = $DB->get_field('course', 'shortname', array('id' => $a->id));
             }
