@@ -24,8 +24,8 @@
 
 $string['description'] = 'Prevent access until a certain amount of time has been spent into a given course.';
 $string['pluginname'] = 'Restriction by timespent in a course';
-$string['full_coursetime'] = 'Available when time spent in course <strong>{$a->fullname}</strong> exceeds <strong>{$a->timespent}</strong> minutes';
-$string['short_coursetime'] = 'Available after <strong>{$a->timespent}</strong> minutes spent in course <strong>{$a->shortname}</strong>';
+$string['full_coursetime'] = 'Available when time spent in course <strong>{$a->fullname}</strong> exceeds <strong>{$a->timespent}</strong>';
+$string['short_coursetime'] = 'Available after <strong>{$a->timespent}</strong> spent in course <strong>{$a->shortname}</strong>';
 $string['title'] = 'Time spent';
 $string['incourse'] = 'in course';
 $string['conditiontitle'] = 'Over minutes spent ';
