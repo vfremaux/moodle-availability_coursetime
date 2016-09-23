@@ -17,8 +17,8 @@
 /**
  * Version info.
  *
- * @package availability_week
- * @copyright 2014 The Open University
+ * @package availability_coursetime
+ * @copyright 2016 valery fremaux -valery.fremaux@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,3 +29,6 @@ $plugin->requires = 2014050800;
 $plugin->component = 'availability_coursetime';
 $plugin->release = '2.7.0 (Build 2016090600)';
 $plugin->dependencies = array('block_use_stats' => '*');
+
+// Non moodle attributes
+$plugin->codeincrement = '2.7.0000';
