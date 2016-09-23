@@ -18,7 +18,7 @@
  * Date condition.
  *
  * @package availability_coursetime
- * @copyright 2014 Valery Fremaux
+ * @copyright 2016 Valery Fremaux (valery.fremaux@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
