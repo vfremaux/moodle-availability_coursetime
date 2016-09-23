@@ -83,7 +83,7 @@ class condition extends \core_availability\condition {
         $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
-        // Timespent stored in minutes
+        // Timespent stored in minutes.
         $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
 
         if ($not) {
@@ -104,7 +104,7 @@ class condition extends \core_availability\condition {
         $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
-        // Timespent stored in minutes
+        // Timespent stored in minutes.
         $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
 
         if ($not) {

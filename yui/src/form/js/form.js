@@ -34,11 +34,11 @@ M.availability_coursetime.form.getNode = function(json) {
     // Create HTML structure.
     var strings = M.str.availability_coursetime;
     var html = '<span class="availability-group">';
-    html += '<label><span class="accesshide"></span> ' + strings.conditiontitle +
-            ' <input name="timespent" type="text" style="width: 10em" title="' +
+    html += '<label><span class="accesshide"></span> ' + strings.conditiontitle + 
+            ' <input name="timespent" type="text" style="width: 10em" title="' + 
             strings.conditiontitle + '"/></label>';
-    html += '<label> ' + strings.incourse + ' ' +
-            '<select name="courseid">' +
+    html += '<label> ' + strings.incourse + ' ' + 
+            '<select name="courseid">' + 
             '<option value="choose">' + M.str.moodle.choosedots + '</option>';
     var fieldInfo;
     for (var i = 0; i < this.courses.length; i++) {
@@ -78,7 +78,7 @@ M.availability_coursetime.form.getNode = function(json) {
     return node;
 };
 
-// This brings back form values into an exportable object
+// This brings back form values into an exportable object.
 M.availability_coursetime.form.fillValue = function(value, node) {
     // Set field.
     var field = node.one('select[name=courseid]').get('value');
@@ -95,11 +95,11 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
     var value = {};
     this.fillValue(value, node);
 
-    // Check timespent
+    // Check timespent.
     if (value.t === undefined) {
         errors.push('availability_coursetime:error_nulltimespent');
     }
-    // Check course
+    // Check course.
     if (value.c === undefined) {
         errors.push('availability_coursetime:error_nocourse');
     }

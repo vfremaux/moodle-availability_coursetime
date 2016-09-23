@@ -31,5 +31,5 @@ $plugin->release = '2.7.0 (Build 2016090600)';
 $plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('block_use_stats' => '*');
 
-// Non moodle attributes
+// Non moodle attributes.
 $plugin->codeincrement = '2.7.0000';
