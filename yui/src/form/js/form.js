@@ -1,5 +1,3 @@
-YUI.add('moodle-availability_coursetime-form', function (Y, NAME) {
-
 /**
  * JavaScript for form editing course conditions.
  *
@@ -106,5 +104,3 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
         errors.push('availability_coursetime:error_nocourse');
     }
 };
-
-}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});
