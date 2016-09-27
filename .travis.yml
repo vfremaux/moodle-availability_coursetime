@@ -15,7 +15,6 @@ env:
   - DB=pgsql MOODLE_BRANCH=MOODLE_27_STABLE
   - DB=mysqli MOODLE_BRANCH=MOODLE_27_STABLE
 
-
 before_install:
   - phpenv config-rm xdebug.ini
   - cd ../..
@@ -24,7 +23,7 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-  - moodle-plugin-ci add-plugin --branch $MOODLE_BRANCH vfremaux/moodle-block_use_stats
+  - moodle-plugin-ci add-plugin --branch MOODLE_27_STABLE vfremaux/moodle-block_use_stats
   - moodle-plugin-ci install
 
 script:
