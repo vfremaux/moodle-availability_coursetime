@@ -17,7 +17,7 @@
 /**
  * Version info.
  *
- * @package availability_week
+ * @package availability_coursetime
  * @copyright 2016 Valery Fremaux (valery.fremaux@gmail.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,5 +31,5 @@ $plugin->release = '2.9.0 (Build 2016090600)';
 $plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('block_use_stats' => '*');
 
-// Non moodle attributes
+// Non moodle attributes.
 $plugin->codeincrement = '2.9.0000';
