@@ -1,3 +1,5 @@
+YUI.add('moodle-availability_coursetime-form', function (Y, NAME) {
+
 /**
  * JavaScript for form editing course conditions.
  *
@@ -34,11 +36,11 @@ M.availability_coursetime.form.getNode = function(json) {
     // Create HTML structure.
     var strings = M.str.availability_coursetime;
     var html = '<span class="availability-group">';
-    html += '<label><span class="accesshide"></span> ' + strings.conditiontitle + 
-            ' <input name="timespent" type="text" style="width: 10em" title="' + 
+    html += '<label><span class="accesshide"></span> ' + strings.conditiontitle +
+            ' <input name="timespent" type="text" style="width: 10em" title="' +
             strings.conditiontitle + '"/></label>';
-    html += '<label> ' + strings.incourse + ' ' + 
-            '<select name="courseid">' + 
+    html += '<label> ' + strings.incourse + ' ' +
+            '<select name="courseid">' +
             '<option value="choose">' + M.str.moodle.choosedots + '</option>';
     var fieldInfo;
     for (var i = 0; i < this.courses.length; i++) {
@@ -63,6 +65,7 @@ M.availability_coursetime.form.getNode = function(json) {
     if (!M.availability_coursetime.form.addedEvents) {
         M.availability_coursetime.form.addedEvents = true;
         var updateForm = function(input) {
+            var ancestorNode = input.ancestor('span.availability_coursetime');
             M.core_availability.form.update();
         };
         var root = Y.one('#fitem_id_availabilityconditionsjson');
@@ -77,7 +80,7 @@ M.availability_coursetime.form.getNode = function(json) {
     return node;
 };
 
-// This brings back form values into an exportable object.
+// This brings back form values into an exportable object
 M.availability_coursetime.form.fillValue = function(value, node) {
     // Set field.
     var field = node.one('select[name=courseid]').get('value');
@@ -103,3 +106,5 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
         errors.push('availability_coursetime:error_nocourse');
     }
 };
+
+}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});

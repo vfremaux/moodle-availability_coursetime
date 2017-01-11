@@ -25,11 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2016090600;
-$plugin->requires = 2016051900;
+$plugin->requires = 2014050800;
 $plugin->component = 'availability_coursetime';
-$plugin->release = '3.1.0 (Build 2016090600)';
+$plugin->release = '2.7.0 (Build 2016090600)';
 $plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('block_use_stats' => '*');
 
-// Non moodle attribute.
-$plugin->codeincrement = '3.1.0000';
+// Non moodle attributes.
+$plugin->codeincrement = '2.7.0000';
