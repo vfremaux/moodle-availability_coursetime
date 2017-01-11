@@ -18,15 +18,15 @@
  * Date condition.
  *
  * @package availability_coursetime
- * @copyright 2016 Valery Fremaux (valery.fremaux@gmail.com)
+ * @copyright 2014 Valery Fremaux
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace availability_coursetime;
 
-defined('MOODLE_INTERNAL') || die();
-
 require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Week from course start condition.
@@ -83,7 +83,7 @@ class condition extends \core_availability\condition {
         $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
-        // Timespent stored in minutes.
+        // Timespent stored in minutes
         $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
 
         if ($not) {
@@ -104,7 +104,7 @@ class condition extends \core_availability\condition {
         $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
         $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
 
-        // Timespent stored in minutes.
+        // Timespent stored in minutes
         $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
 
         if ($not) {
