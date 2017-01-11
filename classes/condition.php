@@ -24,9 +24,9 @@
 
 namespace availability_coursetime;
 
-defined('MOODLE_INTERNAL') || die();
-
 require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Week from course start condition.

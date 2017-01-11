@@ -63,6 +63,7 @@ M.availability_coursetime.form.getNode = function(json) {
     if (!M.availability_coursetime.form.addedEvents) {
         M.availability_coursetime.form.addedEvents = true;
         var updateForm = function(input) {
+            var ancestorNode = input.ancestor('span.availability_coursetime');
             M.core_availability.form.update();
         };
         var root = Y.one('#fitem_id_availabilityconditionsjson');

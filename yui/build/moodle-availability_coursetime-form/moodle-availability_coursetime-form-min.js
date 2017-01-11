@@ -97,11 +97,10 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
     var value = {};
     this.fillValue(value, node);
 
-    // Check timespent.
+    // Check profile item id.
     if (value.t === undefined) {
         errors.push('availability_coursetime:error_nulltimespent');
     }
-    // Check course.
     if (value.c === undefined) {
         errors.push('availability_coursetime:error_nocourse');
     }

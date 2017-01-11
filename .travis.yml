@@ -12,8 +12,13 @@ php:
 
 env:
  matrix:
-  - DB=pgsql MOODLE_BRANCH=MOODLE_27_STABLE
-  - DB=mysqli MOODLE_BRANCH=MOODLE_27_STABLE
+  - DB=pgsql MOODLE_BRANCH=master
+  - DB=mysqli MOODLE_BRANCH=master
+  - DB=pgsql MOODLE_BRANCH=MOODLE_31_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_31_STABLE
+  - DB=pgsql MOODLE_BRANCH=MOODLE_30_STABLE
+  - DB=mysqli MOODLE_BRANCH=MOODLE_30_STABLE
+
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -23,7 +28,7 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-  - moodle-plugin-ci add-plugin --branch MOODLE_27_STABLE vfremaux/moodle-block_use_stats
+  - moodle-plugin-ci add-plugin vfremaux/moodle-block_use_stats
   - moodle-plugin-ci install
 
 script:
