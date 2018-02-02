@@ -12,6 +12,7 @@ php:
 
 env:
  matrix:
+<<<<<<< HEAD
   - DB=pgsql MOODLE_BRANCH=master
   - DB=mysqli MOODLE_BRANCH=master
   - DB=pgsql MOODLE_BRANCH=MOODLE_31_STABLE
@@ -19,6 +20,10 @@ env:
   - DB=pgsql MOODLE_BRANCH=MOODLE_30_STABLE
   - DB=mysqli MOODLE_BRANCH=MOODLE_30_STABLE
 
+=======
+  - DB=mysqli MOODLE_BRANCH=MOODLE_34_STABLE
+  - DB=pgsql MOODLE_BRANCH=MOODLE_34_STABLE
+>>>>>>> MOODLE_34_STABLE
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -28,7 +33,11 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
+<<<<<<< HEAD
   - moodle-plugin-ci add-plugin vfremaux/moodle-block_use_stats
+=======
+  - moodle-plugin-ci add-plugin vfremaux/moodle-block_use_stats/tree/MOODLE_31_STABLE
+>>>>>>> MOODLE_34_STABLE
   - moodle-plugin-ci install
 
 script:
@@ -37,8 +46,16 @@ script:
   - moodle-plugin-ci phpmd
   - moodle-plugin-ci codechecker
   - moodle-plugin-ci csslint
+<<<<<<< HEAD
   - moodle-plugin-ci shifter
   - moodle-plugin-ci jshint
   - moodle-plugin-ci validate
   - moodle-plugin-ci phpunit
   - moodle-plugin-ci behat
+=======
+#  - moodle-plugin-ci shifter
+  - moodle-plugin-ci jshint
+  - moodle-plugin-ci validate
+#  - moodle-plugin-ci phpunit
+#  - moodle-plugin-ci behat
+>>>>>>> MOODLE_34_STABLE
