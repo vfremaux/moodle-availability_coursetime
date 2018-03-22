@@ -68,7 +68,7 @@ M.availability_coursetime.form.getNode = function(json) {
             var ancestorNode = input.ancestor('span.availability_coursetime');
             M.core_availability.form.update();
         };
-        var root = Y.one('#fitem_id_availabilityconditionsjson');
+        var root = Y.one('.availability-field');
         root.delegate('change', function() {
              updateForm(this);
         }, '.availability_coursetime select');
@@ -97,15 +97,14 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
     var value = {};
     this.fillValue(value, node);
 
-    // Check timespent.
+    // Check timespent
     if (value.t === undefined) {
         errors.push('availability_coursetime:error_nulltimespent');
     }
-    // Check course.
+    // Check course
     if (value.c === undefined) {
         errors.push('availability_coursetime:error_nocourse');
     }
 };
 
-
-}, '@VERSION@', {"requires": ["base", "node", "event", "io", "moodle-core_availability-form"]});
+}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});
