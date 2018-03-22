@@ -72,6 +72,11 @@ class condition extends \core_availability\condition {
     public function is_available($not, \core_availability\info $info, $grabthelot, $userid) {
         global $DB, $CFG;
 
+        $systemcontext = \context_system::instance();
+        if (has_capability('moodle/site:config', $systemcontext)) {
+            return true;
+        }
+
         // Check condition.
         $now = self::get_time();
 
@@ -79,9 +84,15 @@ class condition extends \core_availability\condition {
             return true;
         }
 
+        $coursecontext = \context_course::instance($course->id);
+        if (has_capability('moodle/course:manageactivities', $coursecontext)) {
+            // People who can edit course do not need playing condition.
+            return true;
+        }
+
         require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
         $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
-        $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
+        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
 
         // Timespent stored in minutes.
         $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
@@ -102,7 +113,7 @@ class condition extends \core_availability\condition {
         $course = $DB->get_record('course', array('id' => $this->courseid));
 
         $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
-        $aggregate = use_stats_aggregate_logs($logs, 'module', 0, $course->startdate, $now);
+        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
 
         // Timespent stored in minutes.
         $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
