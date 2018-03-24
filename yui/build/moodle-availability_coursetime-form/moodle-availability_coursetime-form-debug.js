@@ -97,13 +97,15 @@ M.availability_coursetime.form.fillErrors = function(errors, node) {
     var value = {};
     this.fillValue(value, node);
 
-    // Check profile item id.
+    // Check timespent.
     if (value.t === undefined) {
         errors.push('availability_coursetime:error_nulltimespent');
     }
+    // Check course.
     if (value.c === undefined) {
         errors.push('availability_coursetime:error_nocourse');
     }
 };
 
-}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});
+
+}, '@VERSION@', {"requires": ["base", "node", "event", "io", "moodle-core_availability-form"]});
