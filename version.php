@@ -28,9 +28,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2016090600;
+$plugin->version = 2018032400;
 $plugin->requires = 2017110800;
 $plugin->component = 'availability_coursetime';
+<<<<<<< HEAD
 <<<<<<< HEAD
 $plugin->release = '2.7.0 (Build 2016090600)';
 $plugin->dependencies = array('block_use_stats' => '*');
@@ -39,8 +40,11 @@ $plugin->dependencies = array('block_use_stats' => '*');
 $plugin->codeincrement = '2.7.0000';
 =======
 $plugin->release = '3.4.0 (Build 2016090600)';
+=======
+$plugin->release = '3.4.0 (Build 2018032400)';
+>>>>>>> MOODLE_34_STABLE
 $plugin->maturity = MATURITY_RC;
-$plugin->dependencies = array('block_use_stats' => ANY_VERSION);
+$plugin->dependencies = array('block_use_stats' => '2018032400');
 
 // Non moodle attribute.
 $plugin->codeincrement = '3.4.0000';
