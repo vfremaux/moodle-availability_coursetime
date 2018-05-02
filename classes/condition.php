@@ -92,7 +92,8 @@ class condition extends \core_availability\condition {
 
         require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
         $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
-        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
+        // Explicit transmission of course, as availability my be checked before require_login() sets course up.
+        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now, '', false, $course);
 
         // Timespent stored in minutes.
         $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
