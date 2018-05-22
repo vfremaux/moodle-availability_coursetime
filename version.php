@@ -18,34 +18,18 @@
  * Version info.
  *
  * @package availability_coursetime
-<<<<<<< HEAD
- * @copyright 2016 valery fremaux -valery.fremaux@gmail.com)
-=======
  * @copyright 2016 Valery Fremaux (valery.fremaux@gmail.com)
->>>>>>> MOODLE_34_STABLE
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2018032400;
-$plugin->requires = 2017110800;
+$plugin->requires = 2018042700;
 $plugin->component = 'availability_coursetime';
-<<<<<<< HEAD
-<<<<<<< HEAD
-$plugin->release = '2.7.0 (Build 2016090600)';
-$plugin->dependencies = array('block_use_stats' => '*');
-
-// Non moodle attributes
-$plugin->codeincrement = '2.7.0000';
-=======
-$plugin->release = '3.4.0 (Build 2016090600)';
-=======
-$plugin->release = '3.4.0 (Build 2018032400)';
->>>>>>> MOODLE_34_STABLE
+$plugin->release = '3.5.0 (Build 2018032400)';
 $plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('block_use_stats' => '2018032400');
 
 // Non moodle attribute.
-$plugin->codeincrement = '3.4.0000';
->>>>>>> MOODLE_34_STABLE
+$plugin->codeincrement = '3.5.0000';
