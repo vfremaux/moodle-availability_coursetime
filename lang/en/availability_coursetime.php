@@ -22,6 +22,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['privacy:metadata'] = "The coursetime Availability condition do not manipulate any data belonging to users";
+
 $string['description'] = 'Prevent access until a certain amount of time has been spent into a given course.';
 $string['pluginname'] = 'Restriction by timespent in a course';
 $string['full_coursetime'] = 'Available when time spent in course <strong>{$a->fullname}</strong> exceeds <strong>{$a->timespent}</strong>';
