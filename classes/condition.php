@@ -71,6 +71,7 @@ class condition extends \core_availability\condition {
 
     public function is_available($not, \core_availability\info $info, $grabthelot, $userid) {
         global $DB, $CFG;
+        static $CACHE = []; // Request scope cache.
 
         $systemcontext = \context_system::instance();
         if (has_capability('moodle/site:config', $systemcontext)) {
@@ -89,14 +90,19 @@ class condition extends \core_availability\condition {
             // People who can edit course do not need playing condition.
             return true;
         }
+        $cachekey = $course->id.'_'.$userid;
 
-        require_once($CFG->dirroot.'/blocks/use_stats/locallib.php');
-        $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
-        // Explicit transmission of course, as availability my be checked before require_login() sets course up.
-        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now, '', false, $course);
+        if (!array_key_exists($cachekey, $CACHE)) {
+            $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
+            // Explicit transmission of course, as availability my be checked before require_login() sets course up.
+            $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now, '', false, $course);
 
-        // Timespent stored in minutes.
-        $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
+            // Timespent stored in minutes.
+            $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
+            $CACHE[$cachekey] = $allow;
+        } else {
+            $allow = $CACHE[$cachekey];
+        }
 
         if ($not) {
             $allow = !$allow;
@@ -107,17 +113,24 @@ class condition extends \core_availability\condition {
 
     public function is_available_for_all($not = false) {
         global $CFG, $USER, $DB;
+        static $CACHE = []; // Request scope cache.
 
         // Check condition.
         $now = self::get_time();
 
-        $course = $DB->get_record('course', array('id' => $this->courseid));
+        $cachekey = $this->courseid.'_'.$USER->id;
 
-        $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
-        $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
+        if (!array_key_exists($cachekey, $CACHE)) {
+            $course = $DB->get_record('course', array('id' => $this->courseid));
+            $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
+            $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
 
-        // Timespent stored in minutes.
-        $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
+            // Timespent stored in minutes.
+            $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
+            $CACHE[$cachekey] = $allow;
+        } else {
+            $allow = $CACHE[$cachekey];
+        }
 
         if ($not) {
             $allow = !$allow;
