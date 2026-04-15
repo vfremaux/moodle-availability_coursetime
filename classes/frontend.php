@@ -48,19 +48,19 @@ class frontend extends \core_availability\frontend {
     const DATE_SELECTOR_SUPPORTED = false;
 
     protected function get_javascript_strings() {
-        return array('short_coursetime', 'conditiontitle', 'incourse');
+        return ['short_coursetime', 'conditiontitle', 'incourse'];
     }
 
     protected function get_javascript_init_params($course, \cm_info $cm = null, \section_info $section = null) {
         global $DB, $USER;
 
-        $authoredcourses = array();
+        $authoredcourses = [];
         if ($authored = get_user_capability_course('moodle/course:manageactivities', $USER->id, true, '', 'sortorder')) {
             foreach ($authored as $a) {
-                $authoredcourses[$a->id] = $DB->get_field('course', 'shortname', array('id' => $a->id));
+                $authoredcourses[$a->id] = $DB->get_field('course', 'shortname', ['id' => $a->id]);
             }
         }
         $converted = self::convert_associative_array_for_js($authoredcourses, 'field', 'display');
-        return(array($converted));
+        return([$converted]);
     }
 }

@@ -64,14 +64,14 @@ class condition extends \core_availability\condition {
     }
 
     public function save() {
-        return (object)array('type' => 'coursetime',
+        return (object)['type' => 'coursetime',
                 'c' => $this->courseid,
-                't' => $this->timespent);
+                't' => $this->timespent];
     }
 
     public function is_available($not, \core_availability\info $info, $grabthelot, $userid) {
         global $DB, $CFG;
-        static $CACHE = []; // Request scope cache.
+        static $cache = []; // Request scope cache.
 
         $systemcontext = \context_system::instance();
         if (has_capability('moodle/site:config', $systemcontext)) {
@@ -81,7 +81,7 @@ class condition extends \core_availability\condition {
         // Check condition.
         $now = self::get_time();
 
-        if (!$course = $DB->get_record('course', array('id' => $this->courseid))) {
+        if (!$course = $DB->get_record('course', ['id' => $this->courseid])) {
             return true;
         }
 
@@ -92,16 +92,16 @@ class condition extends \core_availability\condition {
         }
         $cachekey = $course->id.'_'.$userid;
 
-        if (!array_key_exists($cachekey, $CACHE)) {
+        if (!array_key_exists($cachekey, $cache)) {
             $logs = use_stats_extract_logs($course->startdate, $now, $userid, $course->id);
             // Explicit transmission of course, as availability my be checked before require_login() sets course up.
             $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now, '', false, $course);
 
             // Timespent stored in minutes.
             $allow = @$aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
-            $CACHE[$cachekey] = $allow;
+            $cache[$cachekey] = $allow;
         } else {
-            $allow = $CACHE[$cachekey];
+            $allow = $cache[$cachekey];
         }
 
         if ($not) {
@@ -113,23 +113,24 @@ class condition extends \core_availability\condition {
 
     public function is_available_for_all($not = false) {
         global $CFG, $USER, $DB;
-        static $CACHE = []; // Request scope cache.
+        static $cache = []; // Request scope cache.
 
         // Check condition.
         $now = self::get_time();
 
         $cachekey = $this->courseid.'_'.$USER->id;
 
-        if (!array_key_exists($cachekey, $CACHE)) {
-            $course = $DB->get_record('course', array('id' => $this->courseid));
+        if (!array_key_exists($cachekey, $cache)) {
+            $course = $DB->get_record('course', ['id' => $this->courseid]);
             $logs = use_stats_extract_logs($course->startdate, $now, $USER->id, $course->id);
             $aggregate = use_stats_aggregate_logs($logs, $course->startdate, $now);
 
             // Timespent stored in minutes.
-            $allow = $aggregate['coursetotal'][$course->id]->elapsed >= $this->timespent * 60;
-            $CACHE[$cachekey] = $allow;
+            $courseelapsed = $aggregate['coursetotal'][$course->id]->elapsed ?? 0;
+            $allow = $courseelapsed >= $this->timespent * 60;
+            $cache[$cachekey] = $allow;
         } else {
-            $allow = $CACHE[$cachekey];
+            $allow = $cache[$cachekey];
         }
 
         if ($not) {
@@ -160,10 +161,13 @@ class condition extends \core_availability\condition {
 
         $satag = $standalone ? 'short_' : 'full_';
 
-        $course = $DB->get_record('course', array('id' => $this->courseid), 'id,shortname,fullname');
-        $course->timespent = block_use_stats_format_time($this->timespent * 60);
-
-        return get_string($satag . 'coursetime', 'availability_coursetime', $course);
+        $course = $DB->get_record('course', ['id' => $this->courseid], 'id,shortname,fullname');
+        if ($course) {
+            $course->timespent = block_use_stats_format_time($this->timespent * (int) MINSECS);
+            return get_string($satag . 'coursetime', 'availability_coursetime', $course);
+        } else {
+            return get_string('error_unknowncourse', 'availability_coursetime');
+        }
     }
 
     /**

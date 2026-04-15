@@ -33,4 +33,5 @@ $string['incourse'] = 'in course';
 $string['conditiontitle'] = 'Over minutes spent ';
 $string['error_nulltimespent'] = 'You must enter a number';
 $string['error_nocourse'] = 'You must choose a reference course';
+$string['error_unknowncourse'] = 'The configured course may not exist any more';
 

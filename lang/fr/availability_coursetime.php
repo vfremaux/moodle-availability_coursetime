@@ -31,4 +31,5 @@ $string['incourse'] = 'minutes passées dans le cours ';
 $string['conditiontitle'] = 'Plus de ';
 $string['error_nulltimespent'] = 'Vous devez entrer un nombre';
 $string['error_nocourse'] = 'Vous devez choisir un cours de référence';
+$string['error_unknowncourse'] = 'Le cours configuré a peut être été supprimé.';
 
